@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Artisan Gallery | Artists</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="main-header">
+    <div class="logo">ARTISAN<span>.</span></div>
+    <nav class="main-nav">
+      <a href="index.html">Home</a>
+      <a href="exhibitions.html">Exhibitions</a>
+      <a href="artists.html" class="active">Artists</a>
+      <a href="booking.html">Book a Visit</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h1>Our Artists</h1>
+    
+    <!-- JS FILTER FEATURE -->
+    <div class="filter-section">
+      <label for="artistFilter">Filter Artworks by Artist:</label>
+      <select id="artistFilter" onchange="filterArtworks()">
+        <option value="all">All Artists</option>
+        <option value="Jane">Jane Doe</option>
+        <option value="John">John Smith</option>
+        <option value="David">David Ochieng</option>
+      </select>
+    </div>
+
+    <div class="grid-layout" id="artworkContainer">
+      <!-- JS Lightbox trigger via onclick -->
+      <div class="art-card" data-artist="Jane">
+        <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=500" alt="Painting 1" onclick="openLightbox(this.src)">
+        <h3>Colours of Expression</h3>
+        <p>By Jane Doe</p>
+      </div>
+
+      <div class="art-card" data-artist="John">
+        <img src="https://images.unsplash.com/photo-1577083552431-6e5fd01aa342?w=500" alt="Painting 2" onclick="openLightbox(this.src)">
+        <h3>African Expressions</h3>
+        <p>By John Smith</p>
+      </div>
+
+      <div class="art-card" data-artist="Jane">
+        <img src="https://images.unsplash.com/photo-1580136579312-94651dfd596d?w=500" alt="Painting 3" onclick="openLightbox(this.src)">
+        <h3>The Art of Stillness</h3>
+        <p>By Jane Doe</p>
+      </div>
+
+      <!-- New Art Card for David -->
+      <div class="art-card" data-artist="David">
+        <img src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?w=500" alt="Painting 4" onclick="openLightbox(this.src)">
+        <h3>Modern Perspectives</h3>
+        <p>By David Ochieng</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- LIGHTBOX MODAL -->
+  <!-- Added onclick to the background div to close when clicking outside the image -->
+  <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <span class="close-btn" onclick="closeLightbox()">&times;</span>
+    <!-- Added event.stopPropagation() to prevent closing when clicking the image itself -->
+    <img id="lightboxImg" src="" alt="Expanded Art" onclick="event.stopPropagation()">
+  </div>
+
+  <footer class="main-footer">
+    <p>&copy; 2026 Artisan Gallery. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
