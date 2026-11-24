@@ -5,57 +5,109 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Artisan Gallery | Book a Visit</title>
   <link rel="stylesheet" href="style.css">
+  <script>(function(){try{var t=localStorage.getItem("artisanTheme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");document.documentElement.setAttribute("data-theme",t)}catch(e){}})();</script>
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
 
   <header class="main-header">
     <div class="logo">ARTISAN<span>.</span></div>
-    <nav class="main-nav">
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="mainNav">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="main-nav" id="mainNav">
       <a href="index.html">Home</a>
       <a href="exhibitions.html">Exhibitions</a>
       <a href="artists.html">Artists</a>
       <a href="booking.html" class="active">Book a Visit</a>
+      <a href="about.html">About</a>
+      <a href="favourites.html">Favourites</a>
     </nav>
+    <button type="button" class="theme-toggle" id="themeToggle" aria-pressed="false">Dark mode</button>
   </header>
 
-  <main class="container">
+  <main class="container" id="main" tabindex="-1">
     <h1>Plan Your Visit</h1>
-    <p>Complete the form below to reserve your place.</p>
+    <p>Choose a day and time, and we will hold your place.</p>
 
-    <!-- JS FORM VALIDATION -->
-    <form id="bookingForm" onsubmit="validateForm(event)">
-      <div class="form-group">
-        <label for="name">Full Name:</label>
-        <input type="text" id="name" required>
-      </div>
-      
-      <div class="form-group">
-        <label for="email">Email Address:</label>
-        <input type="email" id="email" required>
-      </div>
-
-      <div class="form-group">
-        <label for="date">Visit Date:</label>
-        <input type="date" id="date" required>
+    <form id="bookingForm" novalidate>
+      <div class="form-row">
+        <div class="form-group" id="g-bName">
+          <label for="bName">Full name</label>
+          <input type="text" id="bName" autocomplete="name">
+          <p class="field-error" id="bName-error"></p>
+        </div>
+        <div class="form-group" id="g-bEmail">
+          <label for="bEmail">Email address</label>
+          <input type="email" id="bEmail" autocomplete="email">
+          <p class="field-error" id="bEmail-error"></p>
+        </div>
       </div>
 
-      <div class="form-group">
-        <label for="visitors">Number of Visitors:</label>
-        <input type="number" id="visitors" min="1" max="10" required>
+      <div class="form-group" id="g-bPhone">
+        <label for="bPhone">Phone number (optional)</label>
+        <input type="tel" id="bPhone" autocomplete="tel" placeholder="+254 700 000 000">
+        <p class="field-error" id="bPhone-error"></p>
       </div>
 
-      <!-- JS Error & Success Containers -->
-      <div id="errorMsg" class="error-msg"></div>
-      <div id="successMsg" class="success-msg"></div>
+      <div class="form-row">
+        <div class="form-group" id="g-bDate">
+          <label for="bDate">Visit date</label>
+          <input type="date" id="bDate">
+          <p class="field-error" id="bDate-error"></p>
+        </div>
+        <div class="form-group" id="g-bTime">
+          <label for="bTime">Time</label>
+          <select id="bTime"><option value="">Choose a date first</option></select>
+          <p class="field-error" id="bTime-error"></p>
+        </div>
+      </div>
 
-      <button type="submit" class="btn">Submit Booking</button>
+      <div class="form-row">
+        <div class="form-group" id="g-bVisitors">
+          <label for="bVisitors">Number of visitors (1 to 10)</label>
+          <div class="stepper">
+            <button type="button" id="visitorsMinus" aria-label="Fewer visitors">&minus;</button>
+            <input type="number" id="bVisitors" min="1" max="10" value="1">
+            <button type="button" id="visitorsPlus" aria-label="More visitors">+</button>
+          </div>
+          <p class="field-error" id="bVisitors-error"></p>
+        </div>
+        <div class="form-group" id="g-bType">
+          <label for="bType">Type of visit</label>
+          <select id="bType">
+            <option>General visit</option>
+            <option>Guided tour</option>
+            <option>Group or school visit</option>
+            <option>Private viewing</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="bNotes">Anything we should know? (optional)</label>
+        <textarea id="bNotes" rows="3" maxlength="300" placeholder="Accessibility needs, a particular exhibition, celebrations..."></textarea>
+      </div>
+
+      <button type="submit" class="btn">Reserve my place</button>
     </form>
+
+    <section id="confirmation" class="confirmation" hidden aria-live="polite"></section>
+
+    <section class="my-bookings" id="myBookingsSection" hidden>
+      <h2 class="section-title">Your bookings</h2>
+      <p class="results-count">Saved in this browser only.</p>
+      <ul id="bookingList" class="booking-list"></ul>
+    </section>
   </main>
 
   <footer class="main-footer">
     <p>&copy; 2026 Artisan Gallery. All rights reserved.</p>
+    <p><a href="mailto:jjaredmaina@gmail.com">jjaredmaina@gmail.com</a></p>
   </footer>
 
   <script src="script.js"></script>
+  <script src="booking.js"></script>
+  <script src="features.js"></script>
 </body>
 </html>

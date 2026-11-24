@@ -5,22 +5,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Artisan Gallery | Home</title>
   <link rel="stylesheet" href="style.css">
+  <script>(function(){try{var t=localStorage.getItem("artisanTheme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");document.documentElement.setAttribute("data-theme",t)}catch(e){}})();</script>
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
 
   <!-- NAVIGATION -->
   <header class="main-header">
     <div class="logo">ARTISAN<span>.</span></div>
-    <nav class="main-nav">
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="mainNav">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="main-nav" id="mainNav">
       <a href="index.html" class="active">Home</a>
       <a href="exhibitions.html">Exhibitions</a>
       <a href="artists.html">Artists</a>
       <a href="booking.html">Book a Visit</a>
+      <a href="about.html">About</a>
+      <a href="favourites.html">Favourites</a>
     </nav>
+    <button type="button" class="theme-toggle" id="themeToggle" aria-pressed="false">Dark mode</button>
   </header>
 
   <!-- MAIN CONTENT -->
-  <main class="container">
+  <main class="container" id="main" tabindex="-1">
     <section class="hero">
       <h1>Where Art Meets Inspiration</h1>
       <p>Explore extraordinary artworks from contemporary artists.</p>
@@ -29,31 +37,30 @@
 
     <section>
       <h2 class="section-title">Featured Artworks</h2>
-      <div class="grid-layout">
-        <article class="art-card">
-          <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=500" alt="Still Life Painting">
-          <h3>Colours of Expression</h3>
-          <p>By Jane Doe</p>
-        </article>
-        <article class="art-card">
-          <img src="https://images.unsplash.com/photo-1577083552431-6e5fd01aa342?w=500" alt="Abstract Art">
-          <h3>African Expressions</h3>
-          <p>By John Smith</p>
-        </article>
-        <article class="art-card">
-          <img src="https://images.unsplash.com/photo-1580136579312-94651dfd596d?w=500" alt="Modern Art">
-          <h3>The Art of Stillness</h3>
-          <p>By Jane Doe</p>
-        </article>
-      </div>
+      <!-- Cards are generated from data.js -->
+      <div class="grid-layout" id="featuredContainer"></div>
     </section>
   </main>
+
+  <!-- LIGHTBOX MODAL -->
+  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Artwork viewer">
+    <button class="close-btn" aria-label="Close viewer">&times;</button>
+    <button class="lb-nav lb-prev" id="lbPrev" aria-label="Previous artwork">&#10094;</button>
+    <figure class="lb-figure">
+      <img id="lightboxImg" src="" alt="">
+      <figcaption id="lightboxCaption"></figcaption>
+    </figure>
+    <button class="lb-nav lb-next" id="lbNext" aria-label="Next artwork">&#10095;</button>
+  </div>
 
   <!-- FOOTER -->
   <footer class="main-footer">
     <p>&copy; 2026 Artisan Gallery. All rights reserved.</p>
+    <p><a href="mailto:jjaredmaina@gmail.com">jjaredmaina@gmail.com</a></p>
   </footer>
 
+  <script src="data.js"></script>
   <script src="script.js"></script>
+  <script src="features.js"></script>
 </body>
 </html>

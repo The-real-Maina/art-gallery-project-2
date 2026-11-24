@@ -5,74 +5,78 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Artisan Gallery | Artists</title>
   <link rel="stylesheet" href="style.css">
+  <script>(function(){try{var t=localStorage.getItem("artisanTheme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");document.documentElement.setAttribute("data-theme",t)}catch(e){}})();</script>
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
 
   <header class="main-header">
     <div class="logo">ARTISAN<span>.</span></div>
-    <nav class="main-nav">
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="mainNav">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="main-nav" id="mainNav">
       <a href="index.html">Home</a>
       <a href="exhibitions.html">Exhibitions</a>
       <a href="artists.html" class="active">Artists</a>
       <a href="booking.html">Book a Visit</a>
+      <a href="about.html">About</a>
+      <a href="favourites.html">Favourites</a>
     </nav>
+    <button type="button" class="theme-toggle" id="themeToggle" aria-pressed="false">Dark mode</button>
   </header>
 
-  <main class="container">
+  <main class="container" id="main" tabindex="-1">
     <h1>Our Artists</h1>
-    
-    <!-- JS FILTER FEATURE -->
-    <div class="filter-section">
-      <label for="artistFilter">Filter Artworks by Artist:</label>
-      <select id="artistFilter" onchange="filterArtworks()">
-        <option value="all">All Artists</option>
-        <option value="Jane">Jane Doe</option>
-        <option value="John">John Smith</option>
-        <option value="David">David Ochieng</option>
-      </select>
-    </div>
 
-    <div class="grid-layout" id="artworkContainer">
-      <!-- JS Lightbox trigger via onclick -->
-      <div class="art-card" data-artist="Jane">
-        <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=500" alt="Painting 1" onclick="openLightbox(this.src)">
-        <h3>Colours of Expression</h3>
-        <p>By Jane Doe</p>
+    <!-- SEARCH, FILTER AND SORT (options and cards are generated from data.js) -->
+    <div class="gallery-toolbar">
+      <div class="toolbar-field toolbar-search">
+        <label for="artSearch">Search by title or artist</label>
+        <input type="search" id="artSearch" placeholder="Try &quot;Stillness&quot; or &quot;David&quot;">
       </div>
 
-      <div class="art-card" data-artist="John">
-        <img src="https://images.unsplash.com/photo-1577083552431-6e5fd01aa342?w=500" alt="Painting 2" onclick="openLightbox(this.src)">
-        <h3>African Expressions</h3>
-        <p>By John Smith</p>
+      <div class="toolbar-field">
+        <label for="artistFilter">Artist</label>
+        <select id="artistFilter">
+          <option value="all">All Artists</option>
+        </select>
       </div>
 
-      <div class="art-card" data-artist="Jane">
-        <img src="https://images.unsplash.com/photo-1580136579312-94651dfd596d?w=500" alt="Painting 3" onclick="openLightbox(this.src)">
-        <h3>The Art of Stillness</h3>
-        <p>By Jane Doe</p>
-      </div>
-
-      <!-- New Art Card for David -->
-      <div class="art-card" data-artist="David">
-        <img src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?w=500" alt="Painting 4" onclick="openLightbox(this.src)">
-        <h3>Modern Perspectives</h3>
-        <p>By David Ochieng</p>
+      <div class="toolbar-field">
+        <label for="artSort">Sort by</label>
+        <select id="artSort">
+          <option value="default">Default order</option>
+          <option value="title-asc">Title A to Z</option>
+          <option value="title-desc">Title Z to A</option>
+          <option value="artist-asc">Artist A to Z</option>
+        </select>
       </div>
     </div>
+
+    <p class="results-count" id="resultsCount" aria-live="polite"></p>
+
+    <div class="grid-layout" id="artworkContainer"></div>
   </main>
 
   <!-- LIGHTBOX MODAL -->
-  <!-- Added onclick to the background div to close when clicking outside the image -->
-  <div id="lightbox" class="lightbox" onclick="closeLightbox()">
-    <span class="close-btn" onclick="closeLightbox()">&times;</span>
-    <!-- Added event.stopPropagation() to prevent closing when clicking the image itself -->
-    <img id="lightboxImg" src="" alt="Expanded Art" onclick="event.stopPropagation()">
+  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Artwork viewer">
+    <button class="close-btn" aria-label="Close viewer">&times;</button>
+    <button class="lb-nav lb-prev" id="lbPrev" aria-label="Previous artwork">&#10094;</button>
+    <figure class="lb-figure">
+      <img id="lightboxImg" src="" alt="">
+      <figcaption id="lightboxCaption"></figcaption>
+    </figure>
+    <button class="lb-nav lb-next" id="lbNext" aria-label="Next artwork">&#10095;</button>
   </div>
 
   <footer class="main-footer">
     <p>&copy; 2026 Artisan Gallery. All rights reserved.</p>
+    <p><a href="mailto:jjaredmaina@gmail.com">jjaredmaina@gmail.com</a></p>
   </footer>
 
+  <script src="data.js"></script>
   <script src="script.js"></script>
+  <script src="features.js"></script>
 </body>
 </html>

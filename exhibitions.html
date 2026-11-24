@@ -5,20 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Artisan Gallery | Exhibitions</title>
   <link rel="stylesheet" href="style.css">
+  <script>(function(){try{var t=localStorage.getItem("artisanTheme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");document.documentElement.setAttribute("data-theme",t)}catch(e){}})();</script>
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
 
   <header class="main-header">
     <div class="logo">ARTISAN<span>.</span></div>
-    <nav class="main-nav">
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="mainNav">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="main-nav" id="mainNav">
       <a href="index.html">Home</a>
       <a href="exhibitions.html" class="active">Exhibitions</a>
       <a href="artists.html">Artists</a>
       <a href="booking.html">Book a Visit</a>
+      <a href="about.html">About</a>
+      <a href="favourites.html">Favourites</a>
     </nav>
+    <button type="button" class="theme-toggle" id="themeToggle" aria-pressed="false">Dark mode</button>
   </header>
 
-  <main class="container">
+  <main class="container" id="main" tabindex="-1">
     <h1>Exhibition Schedule</h1>
     <p>See what is happening at the gallery this season.</p>
     
@@ -31,36 +39,21 @@
             <th>Artist</th>
             <th>Dates</th>
             <th>Location</th>
+            <th>Status</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>African Expressions</td>
-            <td>John Smith</td>
-            <td>Nov 20 - Dec 15</td>
-            <td>Main Hall</td>
-          </tr>
-          <tr>
-            <td>The Art of Stillness</td>
-            <td>Jane Doe</td>
-            <td>Dec 05 - Dec 28</td>
-            <td>West Wing</td>
-          </tr>
-          <tr>
-            <td>Modern Perspectives</td>
-            <td>David Ochieng</td>
-            <td>Jan 10 - Feb 10</td>
-            <td>East Gallery</td>
-          </tr>
-        </tbody>
+        <tbody id="exhibitionBody"></tbody>
       </table>
     </div>
   </main>
 
   <footer class="main-footer">
     <p>&copy; 2026 Artisan Gallery. All rights reserved.</p>
+    <p><a href="mailto:jjaredmaina@gmail.com">jjaredmaina@gmail.com</a></p>
   </footer>
 
+  <script src="data.js"></script>
   <script src="script.js"></script>
+  <script src="features.js"></script>
 </body>
 </html>
